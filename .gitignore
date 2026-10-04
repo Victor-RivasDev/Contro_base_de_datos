@@ -8,3 +8,8 @@
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
+
+compose.override.yaml
+compose.yaml
+.env
+.env.dev
