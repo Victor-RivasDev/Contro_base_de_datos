@@ -43,19 +43,19 @@ class DashboardController extends AbstractDashboardController
 
         yield MenuItem::linkToUrl(
             'Categorías', 
-            'fas fa-list', 
+            'fas fa-folder', 
             $adminUrlGenerator->setController(CategoryCrudController::class)->generateUrl()
         );
 
         yield MenuItem::linkToUrl(
             'Publicaciones', 
-            'fas fa-list', 
+            'fas fa-cloud', 
             $adminUrlGenerator->setController(PostCrudController::class)->generateUrl()
         );
 
         yield MenuItem::linkToUrl(
             'Comentarios', 
-            'fas fa-list', 
+            'fas fa-comments', 
             $adminUrlGenerator->setController(CommentCrudController::class)->generateUrl()
         );
 
