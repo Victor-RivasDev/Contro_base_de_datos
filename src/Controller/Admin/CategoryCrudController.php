@@ -19,6 +19,8 @@ class CategoryCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
+            ->setEntityLabelInSingular('Categoría')
+            ->setEntityLabelInPlural('Categorías')
             ->setSearchFields(['title', 'content'])
             ->setDefaultSort(['id' => 'DESC']);
     }
@@ -28,9 +30,8 @@ class CategoryCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')->onlyOnIndex(),
-            TextField::new('name', 'Nombre de la categoría'),
+            TextField::new('name', 'Nombre'),
             TextField::new('slug'),
-            TextEditorField::new('content', 'Contenido de la aplicación')->hideOnIndex(),
         ];
     }
 }
