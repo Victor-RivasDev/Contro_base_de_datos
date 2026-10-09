@@ -5,10 +5,12 @@ namespace App\Controller\Admin;
 use App\Entity\Category;
 use App\Entity\Comment;
 use App\Entity\Post;
+use App\Entity\User;
 
 use App\Controller\Admin\CategoryCrudController;
 use App\Controller\Admin\CommentCrudController;
 use App\Controller\Admin\PostCrudController;
+use App\Controller\Admin\UserCrudController;
 
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -17,7 +19,10 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
 
+
 #[AdminDashboard(routePath: '/admin', routeName: 'admin')]
+
+
 class DashboardController extends AbstractDashboardController
 {
     public function index(): Response
@@ -35,6 +40,7 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
+        
         $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
 
         yield MenuItem::linkToDashboard('Inicio', 'fa fa-home');
@@ -59,7 +65,11 @@ class DashboardController extends AbstractDashboardController
             $adminUrlGenerator->setController(CommentCrudController::class)->generateUrl()
         );
 
-        yield MenuItem::section();
+        yield MenuItem::linkToUrl(
+            'Usuarios', 
+            'fas fa-users', 
+            $adminUrlGenerator->setController(UserCrudController::class)->generateUrl()
+        );
         yield MenuItem::linkToRoute('Sitio Web', 'fa fa-home', 'app_home');
     }
 }
