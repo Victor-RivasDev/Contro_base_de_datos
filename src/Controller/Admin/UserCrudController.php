@@ -7,9 +7,15 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
+
+
 
 class UserCrudController extends AbstractCrudController
 {
@@ -24,7 +30,7 @@ class UserCrudController extends AbstractCrudController
         return $crud
             ->setEntityLabelInSingular('Usuario')
             ->setEntityLabelInPlural('Usuarios')
-            ->setSearchFields(['email'])
+            ->setSearchFields(['name', 'email'])
             ->setDefaultSort(['id' => 'DESC']);
     }
 
@@ -34,6 +40,7 @@ class UserCrudController extends AbstractCrudController
         return [
             IdField::new('id')->onlyOnIndex(),
             EmailField::new('email'),
+            TextField::new('name'),
             ChoiceField::new('roles')
                 ->setChoices([
                     'Usuario' => 'ROLE_USER',
@@ -41,6 +48,11 @@ class UserCrudController extends AbstractCrudController
                 ])
                 ->allowMultipleChoices()
         ];
+    }
+
+    public function configureActions(Actions $actions): Actions
+    {
+        return parent::configureActions($actions)->disable(Action::NEW);
     }
     
 }
