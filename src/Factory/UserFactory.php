@@ -2,13 +2,13 @@
 
 namespace App\Factory;
 
-use App\Entity\Comment;
+use App\Entity\User;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
 /**
- * @extends PersistentProxyObjectFactory<Comment>
+ * @extends PersistentProxyObjectFactory<User>
  */
-final class CommentFactory extends PersistentProxyObjectFactory
+final class UserFactory extends PersistentProxyObjectFactory
 {
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
@@ -21,7 +21,7 @@ final class CommentFactory extends PersistentProxyObjectFactory
 
     public static function class(): string
     {
-        return Comment::class;
+        return User::class;
     }
 
     /**
@@ -32,8 +32,12 @@ final class CommentFactory extends PersistentProxyObjectFactory
     protected function defaults(): array|callable
     {
         return [
-            'content' => self::faker()->text(),
-            'user' => UserFactory::random(),
+            'email' => self::faker()->email(),
+            'roles' => ['ROLE_USER'],
+            'password' => '123456789',
+            'name' => self::faker()->name(),
+            
+            
         ];
     }
 
@@ -43,7 +47,7 @@ final class CommentFactory extends PersistentProxyObjectFactory
     protected function initialize(): static
     {
         return $this
-            // ->afterInstantiate(function(Comment $comment): void {})
+            // ->afterInstantiate(function(User $user): void {})
         ;
     }
 }
