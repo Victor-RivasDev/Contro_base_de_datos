@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Form\CommentType;
+
 use App\Entity\Post;
 use App\Repository\PostRepository;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
@@ -20,7 +22,7 @@ final class PageController extends AbstractController
     }
     #[Route('/blog/{slug}', name: 'app_post')]
     public function post(#[MapEntity(mapping: ['slug' => 'slug'])] Post $post): Response
-    {
-        return $this->render('page/post.html.twig', ['post' => $post]);
+    {   $form = $this->createForm(CommentType::class);
+        return $this->render('page/post.html.twig', ['post' => $post, 'form' => $form->createView()]);
     }
 }
