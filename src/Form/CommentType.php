@@ -8,6 +8,7 @@ use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CommentType extends AbstractType
@@ -16,14 +17,10 @@ class CommentType extends AbstractType
     {
         $builder
             ->add('content')
-            ->add('post', EntityType::class, [
-                'class' => Post::class,
-                'choice_label' => 'id',
+            ->add('Enviar', SubmitType::class, [
+                'attr' => ['class' => 'btn-dark'],
             ])
-            ->add('user', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'id',
-            ])
+
         ;
     }
 
